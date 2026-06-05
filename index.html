@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Metalab Order Studio</title>
     <meta
       name="description"
-      content="先选择 shelf 或 box，再进入专属页面选择 Metal only 或 Metal + color，并实时查看颜色和价格变化。"
+      content="Select shelf or box, choose metal only or metal + color, and preview live pricing with multilingual support."
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -16,28 +16,38 @@
 
     <header class="topbar">
       <div class="brand">
-        <img src="../logo/logo.svg" alt="Metalab logo" class="brand-logo" />
+        <picture class="brand-mark">
+          <source srcset="./logo/logo.svg" type="image/svg+xml" />
+          <img src="./logo/logo.png" alt="Metalab logo" class="brand-logo" />
+        </picture>
         <div class="brand-copy">
-          <span class="eyebrow">Powder Coating Ordering</span>
-          <h1>Metalab 下单工作台</h1>
+          <span class="eyebrow" id="brandEyebrow">Powder Coating Ordering</span>
+          <h1 id="brandTitle">Metalab Order Studio</h1>
         </div>
       </div>
 
-      <nav class="nav">
-        <a href="#products">产品</a>
-        <a href="#products">配置</a>
-        <a href="#contact">联系</a>
-      </nav>
+      <div class="topbar-actions">
+        <nav class="nav">
+          <a href="#products" id="navProducts">Products</a>
+          <a href="#products" id="navConfig">Configure</a>
+          <a href="#contact" id="navContact">Contact</a>
+        </nav>
+        <div class="lang-switch" role="group" aria-label="Language switcher">
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="zh-Hans">简</button>
+          <button type="button" class="lang-btn" data-lang="zh-Hant">繁</button>
+        </div>
+      </div>
     </header>
 
     <main class="shell">
       <section class="landing-view" id="landingView">
         <div class="hero-copy hero-copy-wide">
-          <span class="pill">Step 1</span>
-          <h2>先选产品，再进入专属配置页</h2>
-          <p>
-            现在先做两类产品：Shelf 和 Box。你先选产品，然后进入对应页面，接着选择
-            “只做金属”或“金属 + 颜色”，最后再挑颜色并实时看价格变化。
+          <span class="pill" id="landingStep">Step 1</span>
+          <h2 id="landingTitle">Pick a product, then open its dedicated page</h2>
+          <p id="landingCopy">
+            Start with two product types for now: Shelf and Box. Pick a product, enter its dedicated
+            page, choose metal only or metal plus color, then preview the finish and pricing live.
           </p>
         </div>
 
@@ -51,8 +61,8 @@
               <span class="shelf-board bottom"></span>
             </span>
             <span class="product-text">
-              <strong>Shelf</strong>
-              <span>适合层架、展示架、开放式金属结构件</span>
+              <strong id="shelfName">Shelf</strong>
+              <span id="shelfCopy">Best for racks, display frames, and open metal structures.</span>
             </span>
           </button>
 
@@ -63,8 +73,8 @@
               <span class="box-face front"></span>
             </span>
             <span class="product-text">
-              <strong>Box</strong>
-              <span>适合金属盒体、设备外壳、封闭式零件</span>
+              <strong id="boxName">Box</strong>
+              <span id="boxCopy">Best for metal enclosures, housings, and closed parts.</span>
             </span>
           </button>
         </div>
@@ -72,7 +82,7 @@
 
       <section class="config-view" id="configurator" hidden>
         <div class="config-topbar">
-          <button class="back-link" type="button" id="backToProducts">← 返回产品选择</button>
+          <button class="back-link" type="button" id="backToProducts">← Back to products</button>
           <div class="config-breadcrumb">
             <span id="selectedProductLabel">Shelf</span>
             <span>·</span>
@@ -84,7 +94,7 @@
           <div class="preview-card">
             <div class="preview-header">
               <div>
-                <span class="eyebrow">专属页面预览</span>
+                <span class="eyebrow" id="previewEyebrow">Dedicated page preview</span>
                 <h3 id="previewTitle">Shelf / Metal + color</h3>
               </div>
               <span class="chip" id="finishChip">Color finish</span>
@@ -112,11 +122,11 @@
 
             <div class="preview-footer">
               <div class="preview-spec">
-                <span>产品</span>
+                <span id="previewProductLabel">Product</span>
                 <strong id="productLabel">Shelf</strong>
               </div>
               <div class="preview-spec">
-                <span>当前选择</span>
+                <span id="previewChoiceLabel">Current choice</span>
                 <strong id="layerLabel">Metal + color</strong>
               </div>
             </div>
@@ -125,33 +135,33 @@
           <aside class="config-card">
             <div class="config-group">
               <div class="group-head">
-                <h4>2. 选择工艺方向</h4>
-                <span class="hint">Finish</span>
+                <h4 id="finishHeading">2. Choose finish direction</h4>
+                <span class="hint" id="finishHint">Finish</span>
               </div>
               <div class="choice-stack">
                 <button class="choice-card" type="button" data-finish="metal">
-                  <strong>只要金属制品</strong>
-                  <p>保留金属质感，不加颜色。</p>
+                  <strong id="metalOnlyTitle">Metal only</strong>
+                  <p id="metalOnlyCopy">Keep the raw metal look with no added color.</p>
                 </button>
                 <button class="choice-card" type="button" data-finish="color">
-                  <strong>金属制品 + 颜色</strong>
-                  <p>先选金属制品，再叠加颜色涂层。</p>
+                  <strong id="metalColorTitle">Metal + color</strong>
+                  <p id="metalColorCopy">Choose a metal product first, then layer color coating on top.</p>
                 </button>
               </div>
             </div>
 
             <div class="config-group" id="colorGroup">
               <div class="group-head">
-                <h4>3. 选择颜色</h4>
-                <span class="hint">Color</span>
+                <h4 id="colorHeading">3. Choose color</h4>
+                <span class="hint" id="colorHint">Color</span>
               </div>
               <div class="swatch-grid" id="colorGrid"></div>
             </div>
 
             <div class="config-group">
               <div class="group-head">
-                <h4>4. 数量</h4>
-                <span class="hint">Qty</span>
+                <h4 id="qtyHeading">4. Quantity</h4>
+                <span class="hint" id="qtyHint">Qty</span>
               </div>
               <label class="qty-label">
                 <span id="qtyLabel">1 pcs</span>
@@ -165,13 +175,13 @@
 
             <div class="price-card">
               <div>
-                <span class="hint">实时报价</span>
+                <span class="hint" id="priceHint">Live quote</span>
                 <h3 id="priceValue">CAD 0.00</h3>
                 <p id="priceNote">先选产品，再选工艺方向。</p>
               </div>
               <div class="breakdown" id="breakdown"></div>
-              <button class="primary-btn" type="button">生成报价单</button>
-              <button class="ghost-btn" type="button">添加到订单</button>
+              <button class="primary-btn" type="button" id="quoteBtn">Generate quote</button>
+              <button class="ghost-btn" type="button" id="orderBtn">Add to order</button>
             </div>
           </aside>
         </section>
@@ -179,10 +189,16 @@
     </main>
 
     <footer class="footer" id="contact">
-      <img src="../logo/logo.svg" alt="Metalab logo" class="footer-logo" />
+      <picture class="footer-mark">
+        <source srcset="./logo/logo.svg" type="image/svg+xml" />
+        <img src="./logo/logo.png" alt="Metalab logo" class="footer-logo" />
+      </picture>
       <div>
-        <strong>Metalab Coatings</strong>
-        <p>先选产品，再选是否加颜色，最后完成实时报价。后续可以继续接上传图纸、客服确认和支付流程。</p>
+        <strong id="footerTitle">Metalab Coatings</strong>
+        <p id="footerCopy">
+          Start with a product, choose whether to add color, and finish with a live quote. We can
+          extend this later with uploads, approvals, and payment.
+        </p>
       </div>
     </footer>
 
