@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metalab Order Studio</title>
+    <meta
+      name="description"
+      content="先选择 shelf 或 box，再进入专属页面选择 Metal only 或 Metal + color，并实时查看颜色和价格变化。"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="backdrop backdrop-a"></div>
+    <div class="backdrop backdrop-b"></div>
+
+    <header class="topbar">
+      <div class="brand">
+        <img src="../logo/logo.svg" alt="Metalab logo" class="brand-logo" />
+        <div class="brand-copy">
+          <span class="eyebrow">Powder Coating Ordering</span>
+          <h1>Metalab 下单工作台</h1>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#products">产品</a>
+        <a href="#products">配置</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <section class="landing-view" id="landingView">
+        <div class="hero-copy hero-copy-wide">
+          <span class="pill">Step 1</span>
+          <h2>先选产品，再进入专属配置页</h2>
+          <p>
+            现在先做两类产品：Shelf 和 Box。你先选产品，然后进入对应页面，接着选择
+            “只做金属”或“金属 + 颜色”，最后再挑颜色并实时看价格变化。
+          </p>
+        </div>
+
+        <div class="product-grid" id="products">
+          <button class="product-card" type="button" data-product="shelf">
+            <span class="product-visual visual-shelf">
+              <span class="shelf-post left"></span>
+              <span class="shelf-post right"></span>
+              <span class="shelf-board top"></span>
+              <span class="shelf-board middle"></span>
+              <span class="shelf-board bottom"></span>
+            </span>
+            <span class="product-text">
+              <strong>Shelf</strong>
+              <span>适合层架、展示架、开放式金属结构件</span>
+            </span>
+          </button>
+
+          <button class="product-card" type="button" data-product="box">
+            <span class="product-visual visual-box">
+              <span class="box-face top"></span>
+              <span class="box-face side"></span>
+              <span class="box-face front"></span>
+            </span>
+            <span class="product-text">
+              <strong>Box</strong>
+              <span>适合金属盒体、设备外壳、封闭式零件</span>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <section class="config-view" id="configurator" hidden>
+        <div class="config-topbar">
+          <button class="back-link" type="button" id="backToProducts">← 返回产品选择</button>
+          <div class="config-breadcrumb">
+            <span id="selectedProductLabel">Shelf</span>
+            <span>·</span>
+            <span id="selectedModeLabel">Metal + color</span>
+          </div>
+        </div>
+
+        <section class="hero">
+          <div class="preview-card">
+            <div class="preview-header">
+              <div>
+                <span class="eyebrow">专属页面预览</span>
+                <h3 id="previewTitle">Shelf / Metal + color</h3>
+              </div>
+              <span class="chip" id="finishChip">Color finish</span>
+            </div>
+
+            <div class="scene" aria-label="产品预览">
+              <div class="preview-shell" id="previewShell">
+                <div class="shelf-model" aria-hidden="true">
+                  <span class="shelf-post left"></span>
+                  <span class="shelf-post right"></span>
+                  <span class="shelf-board top"></span>
+                  <span class="shelf-board middle"></span>
+                  <span class="shelf-board bottom"></span>
+                </div>
+                <div class="box-model" aria-hidden="true">
+                  <div class="box top"></div>
+                  <div class="box side"></div>
+                  <div class="box front"></div>
+                  <div class="gloss"></div>
+                  <div class="edge edge-top"></div>
+                  <div class="edge edge-right"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="preview-footer">
+              <div class="preview-spec">
+                <span>产品</span>
+                <strong id="productLabel">Shelf</strong>
+              </div>
+              <div class="preview-spec">
+                <span>当前选择</span>
+                <strong id="layerLabel">Metal + color</strong>
+              </div>
+            </div>
+          </div>
+
+          <aside class="config-card">
+            <div class="config-group">
+              <div class="group-head">
+                <h4>2. 选择工艺方向</h4>
+                <span class="hint">Finish</span>
+              </div>
+              <div class="choice-stack">
+                <button class="choice-card" type="button" data-finish="metal">
+                  <strong>只要金属制品</strong>
+                  <p>保留金属质感，不加颜色。</p>
+                </button>
+                <button class="choice-card" type="button" data-finish="color">
+                  <strong>金属制品 + 颜色</strong>
+                  <p>先选金属制品，再叠加颜色涂层。</p>
+                </button>
+              </div>
+            </div>
+
+            <div class="config-group" id="colorGroup">
+              <div class="group-head">
+                <h4>3. 选择颜色</h4>
+                <span class="hint">Color</span>
+              </div>
+              <div class="swatch-grid" id="colorGrid"></div>
+            </div>
+
+            <div class="config-group">
+              <div class="group-head">
+                <h4>4. 数量</h4>
+                <span class="hint">Qty</span>
+              </div>
+              <label class="qty-label">
+                <span id="qtyLabel">1 pcs</span>
+                <input id="qtyInput" type="range" min="1" max="50" value="1" />
+                <div class="range-row">
+                  <span>1</span>
+                  <span>50</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="price-card">
+              <div>
+                <span class="hint">实时报价</span>
+                <h3 id="priceValue">CAD 0.00</h3>
+                <p id="priceNote">先选产品，再选工艺方向。</p>
+              </div>
+              <div class="breakdown" id="breakdown"></div>
+              <button class="primary-btn" type="button">生成报价单</button>
+              <button class="ghost-btn" type="button">添加到订单</button>
+            </div>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer" id="contact">
+      <img src="../logo/logo.svg" alt="Metalab logo" class="footer-logo" />
+      <div>
+        <strong>Metalab Coatings</strong>
+        <p>先选产品，再选是否加颜色，最后完成实时报价。后续可以继续接上传图纸、客服确认和支付流程。</p>
+      </div>
+    </footer>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
